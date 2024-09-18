@@ -1,10 +1,15 @@
 import React, { useState } from 'react'
 import data from '../components/Data'
 import './Home.css'
+import Modal from './Modal'
 
 export default function Home() {
 
   const[page, setPage] = useState(1)
+  const[selectedRow, setSelectedRow] = useState(null)
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalClose, setIsModalClose] = useState(true);
+
   const dataPerPage = 10;
 
   const startIndex = (page - 1) * dataPerPage;
@@ -27,6 +32,10 @@ export default function Home() {
         setPage(page-1)
       }
     }
+    const handleRowClick = (rowData) => {
+      setSelectedRow(rowData); 
+      setIsModalOpen(true);    
+    };
   return (
     <div className="app">
       <h1>Company Data List</h1>
@@ -46,7 +55,7 @@ export default function Home() {
         <tbody>
           {currentData.map((element)=>{
             return(
-                <tr>
+                <tr onClick={() => handleRowClick(element)}>
                     <td>{element.domain}</td>
                     <td>{element.name}</td>
                     <td>{element.score}</td>
@@ -70,6 +79,7 @@ export default function Home() {
         </button>
        
       </div>
+      <Modal isOpen={isModalOpen} onClose={()=>setIsModalOpen(false)} data={selectedRow} />
     </div>
   
   )
