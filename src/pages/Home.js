@@ -9,6 +9,7 @@ export default function Home() {
   const [selectedRow, setSelectedRow] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [tableData, setTableData] = useState(data);  
+  const [searchTerm, setSearchItem] = useState('')
 
   const dataPerPage = 10;
   const startIndex = (page - 1) * dataPerPage;
@@ -32,7 +33,7 @@ export default function Home() {
     setIsModalOpen(true);
   };
 
-  // Function to handle the saving of edited data
+
   const handleSave = async(updatedData) => {
 
     try {
@@ -48,7 +49,7 @@ export default function Home() {
     const updatedTableData = tableData.map(item =>
       item.domain === updatedData.domain ? updatedData : item  
     );
-    setTableData(updatedTableData);  // Update the state with the modified table data
+    setTableData(updatedTableData);  
     setIsModalOpen(false);    
 
     } catch (error) {
@@ -59,11 +60,27 @@ export default function Home() {
 
           
   };
+  const handleSearchChange=(e)=>{
+    const search = e.target.value;
+    // setTableData(search);
+    setSearchItem(search)
+
+    const filteredItems = data.filter((data) =>
+      data.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setTableData(filteredItems)
+  }
 
   return (
     <div className="app">
       <h1>Company Data List</h1>
       <h6>Current Page: {page}</h6>
+      <input
+        type="text"
+        placeholder="Search by name"
+        value={searchTerm}
+        onChange={handleSearchChange}
+      />
       <table>
         <thead>
           <tr>
