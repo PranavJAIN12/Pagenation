@@ -223,6 +223,26 @@ const data =[
       "phones": ["+55-21-1234-5678"],
       "url": "https://zenith.solutions",
       "country": "Brazil"
+
+    },
+    {
+      "domain": "respondr.ai",
+      "name": "Pranav AI",
+      "score": 95,
+      "public_email": "support@respondr.ai",
+      "phones": ["+61-2-9876-5432"],
+      "url": "https://respondr.ai",
+      "country": "India"
+    },
+    {
+      "domain": "ayush.ai",
+      "name": "ayush AI",
+      "score": 95,
+      "public_email": "support@ayush.ai",
+      "phones": ["+61-2-9876-5432"],
+      "url": "https://ayush.ai",
+      "country": "India"
     }
+
   ]
   export default data;
